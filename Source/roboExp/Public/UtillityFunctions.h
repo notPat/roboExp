@@ -15,6 +15,6 @@ class ROBOEXP_API UUtillityFunctions : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category = "Generator")
-	static TArray<FVector> genArray(FVector middle);
+	static TArray<FVector> genArray(FVector middle, float range, float step);
 	
 };
