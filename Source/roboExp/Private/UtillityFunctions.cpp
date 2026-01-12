@@ -19,3 +19,44 @@ TArray<FVector> UUtillityFunctions::genArray(FVector middle, float range, float 
 	
 	return positions;
 }
+
+
+TArray<FVector> UUtillityFunctions::GenerateConeDirections(
+    const FVector& Axis,
+    float HalfAngleDeg,
+    int32 NumSamples
+)
+{
+    TArray<FVector> Directions;
+
+    FVector Dir = Axis.GetSafeNormal();
+
+    // Build a rotation from X-axis to Dir
+    FMatrix AxisRotation = FRotationMatrix::MakeFromX(Dir);
+
+    float CosMin = FMath::Cos(FMath::DegreesToRadians(HalfAngleDeg));
+
+    for (int32 i = 0; i < NumSamples; i++)
+    {
+        // Uniform cone sampling
+        float U = FMath::FRand();
+        float V = FMath::FRand();
+
+        float CosTheta = FMath::Lerp(CosMin, 1.0f, U);
+        float SinTheta = FMath::Sqrt(1.0f - CosTheta * CosTheta);
+        float Phi = 2.0f * PI * V;
+
+        // Local cone direction (X forward)
+        FVector LocalDir(
+            CosTheta,
+            SinTheta * FMath::Cos(Phi),
+            SinTheta * FMath::Sin(Phi)
+        );
+
+        // Rotate into world space
+        FVector WorldDir = AxisRotation.TransformVector(LocalDir);
+        Directions.Add(WorldDir);
+    }
+
+    return Directions;
+}

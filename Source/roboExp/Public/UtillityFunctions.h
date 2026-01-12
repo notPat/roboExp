@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Math/UnrealMathUtility.h"
 #include "UtillityFunctions.generated.h"
+
 
 /**
  * 
@@ -17,4 +19,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Generator")
 	static TArray<FVector> genArray(FVector middle, float range, float step);
 	
+	UFUNCTION(BlueprintCallable, Category = "Generator")
+	static TArray<FVector> GenerateConeDirections(
+		const FVector& Axis,
+		float HalfAngleDeg,
+		int32 NumSamples
+	);
 };
+
+
