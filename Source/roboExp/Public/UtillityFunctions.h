@@ -18,13 +18,11 @@ class ROBOEXP_API UUtillityFunctions : public UBlueprintFunctionLibrary
 public:
 	UFUNCTION(BlueprintCallable, Category = "Generator")
 	static TArray<FVector> genArray(FVector middle, float range, float step);
-	
+
 	UFUNCTION(BlueprintCallable, Category = "Generator")
-	static TArray<FVector> GenerateConeDirections(
-		const FVector& Axis,
-		float HalfAngleDeg,
-		int32 NumSamples
-	);
+	static TArray<FVector> genGridArray(FVector middle, int32 area, int32 step);
+	
+	
 };
 
 
