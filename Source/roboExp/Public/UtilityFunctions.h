@@ -5,6 +5,11 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Math/UnrealMathUtility.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
+#include "HAL/FileManager.h"
+#include "LidarPointCloud.h"
+#include "Misc/FileHelper.h"
 #include "UtilityFunctions.generated.h"
 
 
@@ -22,7 +27,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Generator")
 	static TArray<FVector> genGridArray(FVector middle, int32 area, int32 step);
 	
+	UFUNCTION(BlueprintCallable, Category = "Data export")
+	static bool WriteToFile(const FString& FileName, const FString& Content);
 	
+	UFUNCTION(BlueprintCallable, Category = "Data export")
+	static bool WriteLidarCloudToFile(
+		ULidarPointCloud* Cloud,
+		const FString& FullPath
+	);
+
+	UFUNCTION(BlueprintCallable, Category = "Data export")
+	static bool ExportXYZ(const FString& FullPath, const TArray<FLidarPointCloudPoint>& Points, float UnitScale);
+
 };
 
 

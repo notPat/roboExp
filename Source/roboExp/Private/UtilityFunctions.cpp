@@ -34,3 +34,41 @@ TArray<FVector> UUtilityFunctions::genGridArray(FVector middle, int32 area, int3
 
 	return positions;
 }
+
+bool UUtilityFunctions::WriteToFile(const FString& FileName, const FString& Content)
+{
+	FString FullPath = FPaths::ProjectSavedDir() + "Exports/" + FileName;
+
+	return FFileHelper::SaveStringToFile(Content, *FullPath);
+}
+
+bool UUtilityFunctions::WriteLidarCloudToFile(ULidarPointCloud* Cloud, const FString& FullPath)
+{
+	if (!Cloud) return false;
+
+
+
+	return Cloud->Export(FullPath);
+}
+
+
+bool UUtilityFunctions::ExportXYZ(const FString& FullPath, const TArray<FLidarPointCloudPoint>& Points, float UnitScale = 1.0f)
+{
+	// create folder
+	IFileManager::Get().MakeDirectory(*FPaths::GetPath(FullPath), true);
+
+	FString Out;
+	Out.Reserve(Points.Num() * 32);
+
+	for (const FLidarPointCloudPoint& P : Points)
+	{
+		
+		float X = P.Location.X;
+		float Y = P.Location.Y;
+		float Z = P.Location.Z;
+
+		Out += FString::Printf(TEXT("%.3f %.3f %.3f\n"), X, Y, Z);
+	}
+
+	return FFileHelper::SaveStringToFile(Out, *FullPath, FFileHelper::EEncodingOptions::ForceUTF8);
+}

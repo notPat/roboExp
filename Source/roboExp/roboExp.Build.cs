@@ -17,8 +17,9 @@ public class roboExp : ModuleRules
 			"ChaosVehicles",
 			"PhysicsCore",
 			"UMG",
-			"Slate"
-		});
+			"Slate",
+            "LidarPointCloudRuntime"
+        });
 
 		PublicIncludePaths.AddRange(new string[] {
 			"roboExp",
