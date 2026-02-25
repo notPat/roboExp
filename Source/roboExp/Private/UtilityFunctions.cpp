@@ -22,13 +22,13 @@ TArray<FVector> UUtilityFunctions::genArray(FVector middle, float range, float s
 	return positions;
 }
 
-TArray<FVector> UUtilityFunctions::genGridArray(FVector middle, int32 maxX, int32 minX, int32 maxY, int32 minY, int32 maxZ, int32 minZ, int32 step)
+TArray<FVector> UUtilityFunctions::genGridArray(FVector middle, int32 maxX, int32 minX, int32 maxY, int32 minY, int32 maxZ, int32 minZ, int32 step, int32 stepZ)
 {
 	TArray<FVector> positions;
 
 	for (float i = -minX; i < maxX; i = i + step)
 		for (float j = -minY; j < maxY; j = j + step)
-			for(float k = -minZ ; k < maxZ; k = k + step)
+			for(float k = -minZ ; k < maxZ; k = k + stepZ)
 				positions.Add(FVector(i, j, k) + middle);
 	
 

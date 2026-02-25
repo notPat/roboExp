@@ -25,7 +25,7 @@ public:
 	static TArray<FVector> genArray(FVector middle, float range, float step);
 
 	UFUNCTION(BlueprintCallable, Category = "Generator")
-	static TArray<FVector> genGridArray(FVector middle, int32 maxX, int32 minX, int32 maxY, int32 minY, int32 maxZ, int32 minZ, int32 step);
+	static TArray<FVector> genGridArray(FVector middle, int32 maxX, int32 minX, int32 maxY, int32 minY, int32 maxZ, int32 minZ, int32 step, int32 stepZ);
 	
 	UFUNCTION(BlueprintCallable, Category = "Data IO")
 	static bool WriteToFile(const FString& FileName, const FString& Content);
